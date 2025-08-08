@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ZenoFeedBack 🔥</title>
+  <style>
+    @keyframes rainbow {
+      0% { border-color: red; }
+      16% { border-color: orange; }
+      33% { border-color: yellow; }
+      50% { border-color: green; }
+      66% { border-color: blue; }
+      83% { border-color: indigo; }
+      100% { border-color: violet; }
+    }
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    h1 { text-shadow: 0px 0px 10px white; }
+    .input-box {
+      padding: 10px;
+      margin: 10px;
+      width: 300px;
+      border: 3px solid red;
+      border-radius: 10px;
+      animation: rainbow 3s linear infinite;
+      background-color: black;
+      color: white;
+    }
+    .submit-btn {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background: black;
+      color: white;
+      border: 3px solid red;
+      border-radius: 10px;
+      animation: rainbow 3s linear infinite;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>ZenoFeedBack 🔥</h1>
+  <input type="text" id="feedback" class="input-box" placeholder="Type your feedback..." />
+  <br>
+  <button class="submit-btn" onclick="sendFeedback()">Submit</button>
+
+  <script>
+    async function sendFeedback() {
+      const feedback = document.getElementById("feedback").value;
+      if (!feedback) {
+        alert("Type something first bro 😏");
+        return;
+      }
+
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ feedback })
+      });
+
+      if (res.ok) {
+        alert("Sent to Discord ✅");
+        document.getElementById("feedback").value = "";
+      } else {
+        alert("Error sending feedback ❌");
+      }
+    }
+  </script>
+</body>
+</html>
